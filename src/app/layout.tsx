@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-slate-700 antialiased`}
       >
         <Navbar />
-        <main className="h-screen bg-slate-700 p-16">{children}</main>
+        <main className="h-screen p-16">{children}</main>
       </body>
     </html>
   );
