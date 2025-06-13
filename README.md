@@ -1,3 +1,3 @@
 # E-commerce em Next (Em Dev...)
 [![My Skills](https://skillicons.dev/icons?i=react,next,ts,tailwind,nodejs,postgres,prisma)](https://skillicons.dev)
-![Desktop Screenshot 2025 06 07 - 15 30 11 94](https://github.com/user-attachments/assets/6ef088e5-8d55-45fe-a4dd-014066e790aa)
+![Desktop Screenshot 2025 06 12 - 21 22 16 25](https://github.com/user-attachments/assets/8add1223-fab1-4863-bfcd-7a4e1e2bdcf5)
