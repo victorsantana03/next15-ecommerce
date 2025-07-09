@@ -3,9 +3,15 @@
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store";
 import Image from "next/image";
+import CheckoutButton from "./CheckoutButton";
+import Checkout from "./Checkout";
 
 const CartDrawer = () => {
   const useStore = useCartStore();
+
+  const totalPrice = useStore.cart.reduce((acc, item) => {
+    return acc + item.price! * item.quantity!;
+  }, 0);
   return (
     <div
       className="fixed top-0 left-0 z-50 h-screen w-full bg-black/25"
@@ -19,36 +25,47 @@ const CartDrawer = () => {
           Voltar para loja
         </button>
         <div className="my-4 border-t border-gray-400"></div>
-        {useStore.cart.map((item) => (
-          <div key={item.id} className="flex gap-4 py-4">
-            <Image
-              src={item.image}
-              alt={item.name}
-              width={120}
-              height={120}
-              className="w-24 object-cover"
-            />
-            <div>
-              <h2 className="w-42 truncate">{item.name}</h2>
-              <h2>Quantidade: {item.quantity}</h2>
-              <p className="text-sm font-bold text-teal-600">
-                {formatPrice(item.price)}
-              </p>
-              <button
-                className="mt-2 mr-1 cursor-pointer rounded-md border px-2 py-1 text-sm"
-                onClick={() => useStore.addProduct(item)}
-              >
-                Adicionar
-              </button>
-              <button
-                className="mt-2 cursor-pointer rounded-md border px-2 py-1 text-sm"
-                onClick={() => useStore.removeProduct(item)}
-              >
-                Remover
-              </button>
-            </div>
-          </div>
-        ))}
+
+        {useStore.onCheckout === "cart" && (
+          <>
+            {useStore.cart.map((item) => (
+              <div key={item.id} className="flex gap-4 py-4">
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={120}
+                  height={120}
+                  className="w-24 object-cover"
+                />
+                <div>
+                  <h2 className="w-42 truncate">{item.name}</h2>
+                  <h2>Quantidade: {item.quantity}</h2>
+                  <p className="text-sm font-bold text-teal-600">
+                    {formatPrice(item.price)}
+                  </p>
+                  <button
+                    className="mt-2 mr-1 cursor-pointer rounded-md border px-2 py-1 text-sm"
+                    onClick={() => useStore.addProduct(item)}
+                  >
+                    Adicionar
+                  </button>
+                  <button
+                    className="mt-2 cursor-pointer rounded-md border px-2 py-1 text-sm"
+                    onClick={() => useStore.removeProduct(item)}
+                  >
+                    Remover
+                  </button>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+
+        {useStore.cart.length > 0 && useStore.onCheckout === "cart" && (
+          <CheckoutButton totalPrice={totalPrice} />
+        )}
+
+        {useStore.onCheckout === "checkout" && <Checkout />}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import ProductImage from "@/app/components/ProductImage";
 import AddCart from "../../components/AddCart";
 import Stripe from "stripe";
 import { formatPrice } from "@/lib/utils";
+
 type ProductPageProps = {
   params: {
     id: string;
